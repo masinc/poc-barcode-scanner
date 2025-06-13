@@ -26,9 +26,19 @@
 					target: scannerElement,
 					constraints: {
 						width: 640,
-						height: cameraHeight,
+						height: 480,
 						facingMode: 'environment'
+					},
+					area: {
+						top: '0%',
+						right: '0%',
+						left: '0%',
+						bottom: '0%'
 					}
+				},
+				locator: {
+					patchSize: 'medium',
+					halfSample: true
 				},
 				decoder: {
 					readers: [
@@ -118,9 +128,13 @@
 		
 		<div 
 			bind:this={scannerElement}
-			class="w-full max-w-2xl mx-auto border-2 border-gray-300 rounded"
+			class="w-full max-w-2xl mx-auto border-2 border-gray-300 rounded overflow-hidden"
 			style="height: {cameraHeight}px;"
-		></div>
+		>
+			<div class="w-full h-full flex items-center justify-center bg-gray-100">
+				<p class="text-gray-500 text-sm">カメラ読み込み中...</p>
+			</div>
+		</div>
 		
 		{#if result}
 			<div class="mt-4 p-4 bg-green-100 border border-green-400 rounded">
