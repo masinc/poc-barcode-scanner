@@ -5,6 +5,7 @@
 	let scannerElement: HTMLDivElement;
 	let result = '';
 	let isScanning = false;
+	let cameraHeight = 400;
 
 	onMount(() => {
 		return () => {
@@ -25,7 +26,7 @@
 					target: scannerElement,
 					constraints: {
 						width: 640,
-						height: 480,
+						height: cameraHeight,
 						facingMode: 'environment'
 					}
 				},
@@ -72,35 +73,53 @@
 	<h1 class="text-3xl font-bold mb-6">バーコードスキャナー POC</h1>
 	
 	<div class="space-y-4">
-		<div class="flex gap-2">
-			<button 
-				on:click={startScanner} 
-				disabled={isScanning}
-				class="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-400"
-			>
-				{isScanning ? '読み取り中...' : 'スキャン開始'}
-			</button>
+		<div class="flex flex-col gap-4">
+			<div class="flex gap-2">
+				<button 
+					on:click={startScanner} 
+					disabled={isScanning}
+					class="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-400"
+				>
+					{isScanning ? '読み取り中...' : 'スキャン開始'}
+				</button>
+				
+				<button 
+					on:click={stopScanner} 
+					disabled={!isScanning}
+					class="px-4 py-2 bg-red-500 text-white rounded disabled:bg-gray-400"
+				>
+					スキャン停止
+				</button>
+				
+				<button 
+					on:click={clearResult}
+					class="px-4 py-2 bg-gray-500 text-white rounded"
+				>
+					結果をクリア
+				</button>
+			</div>
 			
-			<button 
-				on:click={stopScanner} 
-				disabled={!isScanning}
-				class="px-4 py-2 bg-red-500 text-white rounded disabled:bg-gray-400"
-			>
-				スキャン停止
-			</button>
-			
-			<button 
-				on:click={clearResult}
-				class="px-4 py-2 bg-gray-500 text-white rounded"
-			>
-				結果をクリア
-			</button>
+			<div class="flex items-center gap-4">
+				<label for="height-slider" class="text-sm font-medium">
+					カメラ高さ: {cameraHeight}px
+				</label>
+				<input 
+					id="height-slider"
+					type="range" 
+					min="200" 
+					max="800" 
+					step="20"
+					bind:value={cameraHeight}
+					disabled={isScanning}
+					class="flex-1 max-w-sm"
+				/>
+			</div>
 		</div>
 		
 		<div 
 			bind:this={scannerElement}
 			class="w-full max-w-2xl mx-auto border-2 border-gray-300 rounded"
-			style="height: 400px;"
+			style="height: {cameraHeight}px;"
 		></div>
 		
 		{#if result}
