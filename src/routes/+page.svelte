@@ -117,10 +117,23 @@
 		</div>
 		
 		<div 
+			id="scannerElement"
 			bind:this={scannerElement}
-			class="w-full max-w-2xl mx-auto border-2 border-gray-300 rounded"
+			class="w-full max-w-2xl mx-auto border-2 border-gray-300 rounded overflow-hidden relative"
 			style="height: {cameraHeight}px;"
 		></div>
+		
+		<style>
+			:global(#scannerElement video) {
+				width: 100% !important;
+				height: 100% !important;
+				object-fit: cover !important;
+			}
+			:global(#scannerElement canvas) {
+				width: 100% !important;
+				height: 100% !important;
+			}
+		</style>
 		
 		{#if result}
 			<div class="mt-4 p-4 bg-green-100 border border-green-400 rounded">
