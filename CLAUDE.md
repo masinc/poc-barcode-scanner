@@ -14,3 +14,7 @@
 
 - GitHub Pages を使用して、バーコードスキャナーのPOCを実装します。
 - GitHub Actions を使用して、GitHub Pagesにデプロイします。
+
+## ライブラリ
+
+@package.json を参照してください
