@@ -24,10 +24,23 @@
 					type: 'LiveStream',
 					target: scannerElement,
 					constraints: {
-						width: 640,
-						height: 240,
+						width: { ideal: 1280 },
+						height: { ideal: 320 },
+						aspectRatio: { ideal: 4 },
 						facingMode: 'environment'
-					}
+					},
+					area: {
+						top: '0%',
+						right: '0%',
+						left: '0%',
+						bottom: '0%'
+					},
+					singleChannel: false
+				},
+				locate: true,
+				locator: {
+					patchSize: 'medium',
+					halfSample: false
 				},
 				decoder: {
 					readers: [
