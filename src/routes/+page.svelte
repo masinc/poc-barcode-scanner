@@ -66,12 +66,12 @@
 				const canvas = scannerElement.querySelector('canvas');
 				if (video) {
 					video.style.width = '100%';
-					video.style.height = '150px';
-					video.style.objectFit = 'fill';
+					video.style.height = '100%';
+					video.style.objectFit = 'cover';
 				}
 				if (canvas) {
 					canvas.style.width = '100%';
-					canvas.style.height = '150px';
+					canvas.style.height = '100%';
 				}
 			}, 100);
 
@@ -129,41 +129,31 @@
 			id="scannerElement"
 			bind:this={scannerElement}
 			class="w-full max-w-6xl mx-auto border-2 border-gray-300 rounded overflow-hidden relative"
-			style="height: 150px;"
+			style="height: 200px;"
 		></div>
 		
 		<style>
 			#scannerElement {
 				width: 100%;
-				height: 150px;
+				height: 200px;
 				position: relative;
 				overflow: hidden;
 			}
 			:global(#scannerElement video) {
 				width: 100% !important;
-				height: 150px !important;
-				object-fit: fill !important;
+				height: 100% !important;
+				object-fit: cover !important;
 				position: absolute !important;
 				top: 0 !important;
 				left: 0 !important;
-				min-width: 100% !important;
-				min-height: 100% !important;
 			}
 			:global(#scannerElement canvas) {
 				width: 100% !important;
-				height: 150px !important;
+				height: 100% !important;
 				position: absolute !important;
 				top: 0 !important;
 				left: 0 !important;
 				z-index: 10 !important;
-			}
-			:global(.viewport) {
-				width: 100% !important;
-				height: 150px !important;
-			}
-			:global(.drawingBuffer) {
-				width: 100% !important;
-				height: 150px !important;
 			}
 		</style>
 		
