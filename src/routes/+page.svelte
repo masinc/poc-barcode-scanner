@@ -24,9 +24,9 @@
 					type: 'LiveStream',
 					target: scannerElement,
 					constraints: {
-						width: { ideal: 1280 },
-						height: { ideal: 320 },
-						aspectRatio: { ideal: 4 },
+						width: { ideal: 1920 },
+						height: { ideal: 240 },
+						aspectRatio: { ideal: 8 },
 						facingMode: 'environment'
 					},
 					area: {
@@ -113,20 +113,20 @@
 		<div 
 			id="scannerElement"
 			bind:this={scannerElement}
-			class="w-full max-w-4xl mx-auto border-2 border-gray-300 rounded overflow-hidden relative"
-			style="height: 240px;"
+			class="w-full max-w-6xl mx-auto border-2 border-gray-300 rounded overflow-hidden relative"
+			style="height: 150px;"
 		></div>
 		
 		<style>
 			#scannerElement {
 				width: 100%;
-				height: 240px;
+				height: 150px;
 				position: relative;
 				overflow: hidden;
 			}
 			:global(#scannerElement video) {
 				width: 100% !important;
-				height: 240px !important;
+				height: 150px !important;
 				object-fit: cover !important;
 				position: absolute !important;
 				top: 0 !important;
@@ -134,7 +134,7 @@
 			}
 			:global(#scannerElement canvas) {
 				width: 100% !important;
-				height: 240px !important;
+				height: 150px !important;
 				position: absolute !important;
 				top: 0 !important;
 				left: 0 !important;
