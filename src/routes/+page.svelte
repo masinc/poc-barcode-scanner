@@ -60,6 +60,21 @@
 			Quagga.start();
 			isScanning = true;
 
+			// 強制的にサイズ調整
+			setTimeout(() => {
+				const video = scannerElement.querySelector('video');
+				const canvas = scannerElement.querySelector('canvas');
+				if (video) {
+					video.style.width = '100%';
+					video.style.height = '150px';
+					video.style.objectFit = 'fill';
+				}
+				if (canvas) {
+					canvas.style.width = '100%';
+					canvas.style.height = '150px';
+				}
+			}, 100);
+
 			Quagga.onDetected((data) => {
 				result = data.codeResult.code || '';
 				console.log('Barcode detected:', result);
@@ -127,12 +142,12 @@
 			:global(#scannerElement video) {
 				width: 100% !important;
 				height: 150px !important;
-				object-fit: cover !important;
+				object-fit: fill !important;
 				position: absolute !important;
 				top: 0 !important;
 				left: 0 !important;
-				transform: scale(1.2) !important;
-				transform-origin: center !important;
+				min-width: 100% !important;
+				min-height: 100% !important;
 			}
 			:global(#scannerElement canvas) {
 				width: 100% !important;
