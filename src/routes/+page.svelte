@@ -105,14 +105,27 @@
 		></div>
 		
 		<style>
+			#scannerElement {
+				width: 100%;
+				height: 200px;
+				position: relative;
+				overflow: hidden;
+			}
 			:global(#scannerElement video) {
 				width: 100% !important;
 				height: 100% !important;
 				object-fit: cover !important;
+				position: absolute !important;
+				top: 0 !important;
+				left: 0 !important;
 			}
 			:global(#scannerElement canvas) {
 				width: 100% !important;
 				height: 100% !important;
+				position: absolute !important;
+				top: 0 !important;
+				left: 0 !important;
+				z-index: 10 !important;
 			}
 		</style>
 		
