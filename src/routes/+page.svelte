@@ -131,6 +131,8 @@
 				position: absolute !important;
 				top: 0 !important;
 				left: 0 !important;
+				transform: scale(1.2) !important;
+				transform-origin: center !important;
 			}
 			:global(#scannerElement canvas) {
 				width: 100% !important;
@@ -139,6 +141,14 @@
 				top: 0 !important;
 				left: 0 !important;
 				z-index: 10 !important;
+			}
+			:global(.viewport) {
+				width: 100% !important;
+				height: 150px !important;
+			}
+			:global(.drawingBuffer) {
+				width: 100% !important;
+				height: 150px !important;
 			}
 		</style>
 		
