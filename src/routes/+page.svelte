@@ -31,15 +31,7 @@
 				},
 				decoder: {
 					readers: [
-						'code_128_reader',
-						'ean_reader',
-						'ean_8_reader',
-						'code_39_reader',
-						'code_39_vin_reader',
-						'codabar_reader',
-						'upc_reader',
-						'upc_e_reader',
-						'i2of5_reader'
+						'ean_reader' // ISBN-13用
 					]
 				}
 			});
@@ -48,8 +40,13 @@
 			isScanning = true;
 
 			Quagga.onDetected((data) => {
-				result = data.codeResult.code || '';
-				console.log('Barcode detected:', result);
+				const detectedCode = data.codeResult.code || '';
+				if (isValidISBN(detectedCode)) {
+					result = detectedCode;
+					console.log('ISBN detected:', result);
+				} else {
+					console.log('Non-ISBN barcode detected:', detectedCode);
+				}
 			});
 		} catch (error) {
 			console.error('Error starting scanner:', error);
@@ -66,10 +63,26 @@
 	function clearResult() {
 		result = '';
 	}
+
+	function isValidISBN(code: string): boolean {
+		if (!code) return false;
+		
+		// ISBN-13の場合（978または979で始まる13桁）
+		if (code.length === 13 && (code.startsWith('978') || code.startsWith('979'))) {
+			return true;
+		}
+		
+		// ISBN-10の場合（10桁）- 現在はほとんど使われていないが念のため
+		if (code.length === 10) {
+			return true;
+		}
+		
+		return false;
+	}
 </script>
 
 <div class="container mx-auto p-4">
-	<h1 class="text-3xl font-bold mb-6">バーコードスキャナー POC</h1>
+	<h1 class="text-3xl font-bold mb-6">ISBN バーコードスキャナー</h1>
 	
 	<div class="space-y-4">
 		<div class="flex gap-2 justify-center">
