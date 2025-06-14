@@ -38,8 +38,8 @@
 				},
 				locate: true,
 				locator: {
-					patchSize: 'medium',
-					halfSample: false
+					patchSize: 'x-large',
+					halfSample: true
 				},
 				decoder: {
 					readers: [
@@ -76,7 +76,6 @@
 
 			Quagga.onDetected((data) => {
 				result = data.codeResult.code || '';
-				console.log('Barcode detected:', result);
 			});
 		} catch (error) {
 			console.error('Error starting scanner:', error);
