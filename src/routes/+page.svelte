@@ -24,22 +24,10 @@
 					type: 'LiveStream',
 					target: scannerElement,
 					constraints: {
-						width: { ideal: 1920 },
-						height: { ideal: 240 },
-						aspectRatio: { ideal: 8 },
+						width: 640,
+						height: 480,
 						facingMode: 'environment'
-					},
-					area: {
-						top: '0%',
-						right: '0%',
-						left: '0%',
-						bottom: '0%'
 					}
-				},
-				locate: true,
-				locator: {
-					patchSize: 'x-large',
-					halfSample: true
 				},
 				decoder: {
 					readers: [
@@ -59,33 +47,9 @@
 			Quagga.start();
 			isScanning = true;
 
-			// 強制的にサイズ調整
-			setTimeout(() => {
-				const video = scannerElement.querySelector('video');
-				const canvas = scannerElement.querySelector('canvas');
-				if (video) {
-					video.style.width = '100%';
-					video.style.height = '100%';
-					video.style.objectFit = 'cover';
-				}
-				if (canvas) {
-					canvas.style.width = '100%';
-					canvas.style.height = '100%';
-				}
-			}, 100);
-
 			Quagga.onDetected((data) => {
-				const detectedCode = data.codeResult.code || '';
-				if (detectedCode) {
-					result = detectedCode;
-					console.log('Barcode detected:', detectedCode);
-					// 一度読み取ったら停止（連続読み取り防止）
-					setTimeout(() => {
-						if (isScanning) {
-							stopScanner();
-						}
-					}, 1000);
-				}
+				result = data.codeResult.code || '';
+				console.log('Barcode detected:', result);
 			});
 		} catch (error) {
 			console.error('Error starting scanner:', error);
@@ -140,30 +104,6 @@
 			style="height: 200px;"
 		></div>
 		
-		<style>
-			#scannerElement {
-				width: 100%;
-				height: 200px;
-				position: relative;
-				overflow: hidden;
-			}
-			:global(#scannerElement video) {
-				width: 100% !important;
-				height: 100% !important;
-				object-fit: cover !important;
-				position: absolute !important;
-				top: 0 !important;
-				left: 0 !important;
-			}
-			:global(#scannerElement canvas) {
-				width: 100% !important;
-				height: 100% !important;
-				position: absolute !important;
-				top: 0 !important;
-				left: 0 !important;
-				z-index: 10 !important;
-			}
-		</style>
 		
 		{#if result}
 			<div class="mt-4 p-4 bg-green-100 border border-green-400 rounded">
