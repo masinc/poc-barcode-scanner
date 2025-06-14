@@ -26,8 +26,20 @@
 					constraints: {
 						width: { ideal: 1920 },
 						height: { ideal: 240 },
+						aspectRatio: { ideal: 8 },
 						facingMode: 'environment'
+					},
+					area: {
+						top: '0%',
+						right: '0%',
+						left: '0%',
+						bottom: '0%'
 					}
+				},
+				locate: true,
+				locator: {
+					patchSize: 'medium',
+					halfSample: false
 				},
 				decoder: {
 					readers: [
@@ -46,6 +58,21 @@
 
 			Quagga.start();
 			isScanning = true;
+
+			// 強制的にサイズ調整
+			setTimeout(() => {
+				const video = scannerElement.querySelector('video');
+				const canvas = scannerElement.querySelector('canvas');
+				if (video) {
+					video.style.width = '100%';
+					video.style.height = '100%';
+					video.style.objectFit = 'cover';
+				}
+				if (canvas) {
+					canvas.style.width = '100%';
+					canvas.style.height = '100%';
+				}
+			}, 100);
 
 			Quagga.onDetected((data) => {
 				result = data.codeResult.code || '';
