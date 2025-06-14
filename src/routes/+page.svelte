@@ -75,7 +75,17 @@
 			}, 100);
 
 			Quagga.onDetected((data) => {
-				result = data.codeResult.code || '';
+				const detectedCode = data.codeResult.code || '';
+				if (detectedCode) {
+					result = detectedCode;
+					console.log('Barcode detected:', detectedCode);
+					// 一度読み取ったら停止（連続読み取り防止）
+					setTimeout(() => {
+						if (isScanning) {
+							stopScanner();
+						}
+					}, 1000);
+				}
 			});
 		} catch (error) {
 			console.error('Error starting scanner:', error);
